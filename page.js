@@ -46,11 +46,11 @@ function addImageNode(container, url) {
  */
 document.getElementById("selectAll")
         .addEventListener("change", (event) => {
-    const items = document.querySelectorAll(".container input");
-    for (let item of items) {
-        item.checked = event.target.checked;
-    };
-});
+            const items = document.querySelectorAll(".container input");
+            for (let item of items) {
+                item.checked = event.target.checked;
+            };
+        });
 
 /**
  * The "Download" button "onClick" event listener
