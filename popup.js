@@ -85,12 +85,3 @@ function openImagesPage(urls) {
         }
     );
 }
-    /*
-    setTimeout(() => {
-        console.log(urls);
-        chrome.tabs.sendMessage(tab.id, urls, (response) => {});
-        chrome.tabs.update(tab.id,{active:true});
-        window.close();
-    },100);
-    */
-//}
