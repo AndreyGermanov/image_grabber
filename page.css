@@ -1,0 +1,108 @@
+body {
+    margin:0px;
+    padding:0px;
+    background-color: #ffffff;
+}
+
+.header {    
+    display:flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width:100%;
+    position: fixed;
+    padding:10px;
+    background: linear-gradient( #5bc4bc, #01a9e1);
+    z-index:100;
+    box-shadow: 0px 5px 5px #00222266;
+}
+
+.header > span {
+    font-weight: bold;
+    color: black;
+    text-transform: uppercase;
+    color: #ffffff;
+    text-shadow: 3px 3px 3px #000000ff;
+    font-size: 24px;
+}
+
+.header > div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-right: 10px;
+}
+
+.header > div > span {
+    font-weight: bold;
+    color: #ffffff;
+    font-size:16px;
+    text-shadow: 3px 3px 3px #00000088;
+}
+
+.header input {
+    width:20px;
+    height:20px;
+}
+
+.header > button {
+    color:white;
+    background:linear-gradient(#01a9e1, #5bc4bc);
+    border-width:0px;
+    border-radius:5px;
+    padding:10px;
+    font-weight: bold;
+    cursor:pointer;
+    box-shadow: 2px 2px #00000066;
+    margin-right: 20px;
+    font-size:16px;
+    text-shadow: 2px 2px 2px #00000088;
+}
+
+.header > button:hover {
+    background:linear-gradient( #5bc4bc,#01a9e1);
+    box-shadow: 2px 2px #00000066;
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 70px;
+}
+
+.imageDiv {
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    position:relative;
+    width:150px;
+    height:150px;
+    padding:10px;
+    margin:10px;
+    border-radius: 5px;
+    background: linear-gradient(#01a9e1, #5bc4bc);
+    box-shadow: 5px 5px 5px #00222266;
+}
+
+.imageDiv:hover {
+    background: linear-gradient(#5bc4bc,#01a9e1);
+    box-shadow: 10px 10px 10px #00222266;
+}
+
+.imageDiv img {
+    max-width:100%;
+    max-height:100%;
+}
+
+.imageDiv input {
+    position:absolute;
+    top:10px;
+    right:10px;
+    width:20px;
+    height:20px;
+}

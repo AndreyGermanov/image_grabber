@@ -59,13 +59,38 @@ function onResult(frames) {
     // each frame to a single array
     const imageUrls = frames.map(frame=>frame.result)
                             .reduce((r1,r2)=>r1.concat(r2));
-    // Copy to clipboard a string of image URLs, delimited by 
-    // carriage return symbol  
-    window.navigator.clipboard
-          .writeText(imageUrls.join("\n"))
-          .then(()=>{
-             // close the extension popup after data 
-             // is copied to the clipboard
-             window.close();
-          });
+
+    // Open a page with a list of images and send urls to it
+    openImagesPage(imageUrls)
 }
+
+/**
+ * Opens a page with list of URLs and UI to select and
+ * download them on a new browser tab and send an
+ * array of image URLs to this page
+ * 
+ * @param {*} urls - Array of Image URLs to send
+ */
+function openImagesPage(urls) {
+    // TODO: 
+    // * Open a new tab with a HTML page to display an UI    
+    chrome.tabs.create(
+        {"url": "page.html",selected:false},(tab) => {        
+            // * Send `urls` array to this page
+            setTimeout(()=>{
+                chrome.tabs.sendMessage(tab.id,urls,(response) => {
+                    chrome.tabs.update(tab.id,{active: true});
+                });                            
+            },100);
+        }
+    );
+}
+    /*
+    setTimeout(() => {
+        console.log(urls);
+        chrome.tabs.sendMessage(tab.id, urls, (response) => {});
+        chrome.tabs.update(tab.id,{active:true});
+        window.close();
+    },100);
+    */
+//}
