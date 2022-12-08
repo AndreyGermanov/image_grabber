@@ -3,13 +3,13 @@
  * URL's to display from popup.
  */
 chrome.runtime.onMessage
-    .addListener((message,sender,sendResponse) => { 
+    .addListener((message,sender,sendResponse) => {
         addImagesToContainer(message)
         sendResponse("OK");
     });
 
 /**
- * Function that used to display an UI to display a list 
+ * Function that used to display an UI to display a list
  * of images
  * @param {} urls - Array of image URLs
  */
@@ -22,10 +22,10 @@ function addImagesToContainer(urls) {
 }
 
 /**
- * Function dynamically add a DIV with image and checkbox to 
+ * Function dynamically add a DIV with image and checkbox to
  * select it to the container DIV
- * @param {*} container - DOM node of a container div 
- * @param {*} url - URL of image 
+ * @param {*} container - DOM node of a container div
+ * @param {*} url - URL of image
  */
 function addImageNode(container, url) {
     const div = document.createElement("div");
@@ -35,7 +35,7 @@ function addImageNode(container, url) {
     div.appendChild(img);
     const checkbox = document.createElement("input");
     checkbox.type = "checkbox";
-    checkbox.setAttribute("url",url);            
+    checkbox.setAttribute("url",url);
     div.appendChild(checkbox);
     container.appendChild(div)
 }
@@ -54,7 +54,7 @@ document.getElementById("selectAll")
 
 /**
  * The "Download" button "onClick" event listener
- * Used to compress all selected images to a ZIP-archive 
+ * Used to compress all selected images to a ZIP-archive
  * and download this ZIP-archive
  */
 document.getElementById("downloadBtn")
@@ -71,10 +71,10 @@ document.getElementById("downloadBtn")
 /**
  * Function used to get URLs of all selected image
  * checkboxes
- * @returns Array of URL string 
+ * @returns Array of URL string
  */
 function getSelectedUrls() {
-    const urls = 
+    const urls =
         Array.from(document.querySelectorAll(".container input"))
              .filter(item=>item.checked)
              .map(item=>item.getAttribute("url"));
@@ -85,7 +85,7 @@ function getSelectedUrls() {
 }
 
 /**
- * Function used to download all image files, identified 
+ * Function used to download all image files, identified
  * by `urls`, and compress them to a ZIP
  * @param {} urls - list of URLs of files to download
  * @returns a BLOB of generated ZIP-archive
@@ -102,7 +102,13 @@ async function createArchive(urls) {
             console.error(err);
         }
     };
-    return await zip.generateAsync({type:'blob'});
+    return zip.generateAsync({
+        type:'blob',
+        compression: "DEFLATE",
+        compressionOptions: {
+            level: 9
+        }
+    });
 }
 
 /**
@@ -110,8 +116,8 @@ async function createArchive(urls) {
  * image blob only if it has a correct image type
  * and positive size. Otherwise throws an exception.
  * @param {} index - An index of URL in an input
- * @param {*} blob - BLOB with a file content 
- * @returns 
+ * @param {*} blob - BLOB with a file content
+ * @returns
  */
 function checkAndGetFileName(index, blob) {
     let name = parseInt(index)+1;
@@ -124,16 +130,15 @@ function checkAndGetFileName(index, blob) {
 
 /**
  * Triggers browser "Download file" action
- * using a content of a file, provided by 
+ * using a content of a file, provided by
  * "archive" parameter
  * @param {} archive - BLOB of file to download
  */
 function downloadArchive(archive) {
     const link = window.document.createElement('a');
     link.href = window.URL.createObjectURL(archive);
-    link.download = "images.zip";        
+    link.download = "images.zip";
     document.body.appendChild(link);
     link.click();
-    document.body.removeChild(link);    
+    document.body.removeChild(link);
 }
-  
