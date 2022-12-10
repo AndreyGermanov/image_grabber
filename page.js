@@ -140,5 +140,6 @@ function downloadArchive(archive) {
     link.download = "images.zip";
     document.body.appendChild(link);
     link.click();
+    window.URL.revokeObjectURL(link.href);
     document.body.removeChild(link);
 }
