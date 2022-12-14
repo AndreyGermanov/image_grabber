@@ -78,7 +78,7 @@ function openImagesPage(urls) {
                 chrome.tabs.sendMessage(tab.id,urls,(response) => {
                     chrome.tabs.update(tab.id,{active: true});
                 });
-            },100);
+            },500);
         }
     );
 }
